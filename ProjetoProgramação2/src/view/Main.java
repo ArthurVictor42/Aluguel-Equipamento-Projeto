@@ -54,9 +54,11 @@ public class Main {
         FuncionarioServico funcServico = new FuncionarioServico(funcionarioRepositorio);
 
         funcServico.enqueue(new Funcionario("Thiago Calvacante", 19, "154.342.212-12", "81 99845 2363", "ThiaginhoCalva@gmail.com", "Atendende", 1567.8));
-        System.out.println(funcServico.front());
 
         funcServico.enqueue(new Funcionario("Luana Santos", 21, null, null, null, null, 0));
+        funcServico.lista();
+
+        System.out.println(" ");
         funcServico.dequeue();
         
         System.out.println(funcServico.front());

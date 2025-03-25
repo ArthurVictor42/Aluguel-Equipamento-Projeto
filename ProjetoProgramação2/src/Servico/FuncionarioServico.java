@@ -30,4 +30,12 @@ public class FuncionarioServico {
     public Funcionario front(){
         return filaRepositorio.front();
     }
+
+    public void lista(){
+        filaRepositorio.lista().forEach(System.out::println);;
+    }
+
+    public void alteraAluguel(Funcionario funcionario){
+        filaRepositorio.alteraCargo(funcionario);
+    }
 }
