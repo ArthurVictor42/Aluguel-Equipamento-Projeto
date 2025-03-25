@@ -24,7 +24,7 @@ public class Main {
         ArrayList<Cliente> clientes = new ArrayList<>();
         ClienteRepositorio clienteRepositorio = new ClienteRepositorio(clientes);
         ClienteServico clienteServico = new ClienteServico(clienteRepositorio);
-        Cliente cliente = new Cliente("Carlos Santos", 19, "123.422.154-12", "81 99857-3245", "EmailTeste@gmail.com");
+        Cliente cliente = new Cliente("Rua Centro ","Carlos Santos", 19, "123.422.154-12", "81 99857-3245", "EmailTeste@gmail.com");
         clienteServico.cadastra(cliente);
         clienteServico.listar();
 

@@ -13,7 +13,6 @@ public abstract class Pessoa {
         this.cpf = cpf;
         this.celular = celular; 
         this.email = email;
-
     }
 
     public void setNomeCompleto(String novonomeCompleto) {
