@@ -3,6 +3,7 @@ package Repositorio;
 import Entidades.Funcionario;
 import Entidades.FuncionarioFilaArrayList;
 import Interface.IFuncionarioFilaRepositorio;
+import java.util.ArrayList;
 
 
 public class FuncionarioRepositorio implements IFuncionarioFilaRepositorio {
@@ -32,5 +33,16 @@ public class FuncionarioRepositorio implements IFuncionarioFilaRepositorio {
         return filafuncionario.front();
     }
 
+    public ArrayList<Funcionario> lista(){
+        return filafuncionario.lista();
+    }
 
+    public void alteraCargo(Funcionario funcionario){
+        for(Funcionario fun: filafuncionario.lista()){
+            if(fun.getCargo().equals(funcionario.getCargo())){
+                fun.setCargo(funcionario.getCargo());
+                break;
+            }
+        }
+    }
 }

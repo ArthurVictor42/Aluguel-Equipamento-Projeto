@@ -39,4 +39,8 @@ public class FuncionarioFilaArrayList {
         return fila.get(0);
     }
 
+    public ArrayList<Funcionario> lista(){
+        return fila;
+    }
+
 }

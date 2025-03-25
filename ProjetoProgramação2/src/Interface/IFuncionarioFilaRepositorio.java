@@ -1,4 +1,6 @@
 package Interface;
+
+import java.util.ArrayList;
 import Entidades.Funcionario;
 
 public interface IFuncionarioFilaRepositorio {
@@ -11,4 +13,8 @@ public interface IFuncionarioFilaRepositorio {
     int size();
 
     Funcionario front();
+
+    ArrayList<Funcionario> lista();
+
+    void alteraCargo(Funcionario funcionario);
 }
