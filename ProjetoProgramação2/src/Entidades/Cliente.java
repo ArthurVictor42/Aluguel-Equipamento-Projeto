@@ -5,7 +5,7 @@ public class Cliente extends Pessoa {
     private int id;
     private static int contID = 1;
 
-    public Cliente( String endereco, String nomeCompleto, int idade, String cpf, String celular, String email){
+    public Cliente(String nomeCompleto, int idade, String cpf, String celular, String email, String endereco){
         super(nomeCompleto, idade, cpf, celular, email);
         this.endereco = endereco;
         this.id = contID++;

@@ -32,7 +32,7 @@ public class Main {
         ArrayList<Cliente> clientes = new ArrayList<>();
         ClienteRepositorio clienteRepositorio = new ClienteRepositorio(clientes);
         ClienteServico clienteServico = new ClienteServico(clienteRepositorio);
-        Cliente cliente = new Cliente("Rua Centro ","Carlos Santos", 19, "123.422.154-12", "81 99857-3245", "EmailTeste@gmail.com");
+        Cliente cliente = new Cliente("Carlos Santos", 19, "123.422.154-12", "81 99857-3245", "EmailTeste@gmail.com", "Rua Maravilha");
         clienteServico.cadastra(cliente);
         clienteServico.listar();
 
@@ -44,11 +44,12 @@ public class Main {
         Aluguel aluguel = new Aluguel(200);
 
         aluguelServico.calcularManutencao(aluguel);
-        aluguelServico.cadastra(aluguel);
+        aluguelServico.adicionar(aluguel);
         aluguelServico.listar();
         
         System.out.println(" ");
 
+        // Funcionarios usando Fila com ArrayList
         FuncionarioRepositorio funcionarioRepositorio = new FuncionarioRepositorio();
         FuncionarioServico funcServico = new FuncionarioServico(funcionarioRepositorio);
 
