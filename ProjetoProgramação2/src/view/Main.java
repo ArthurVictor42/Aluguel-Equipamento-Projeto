@@ -24,7 +24,7 @@ public class Main {
         EquipamentoRepositorio equipamentoRepositorio = new EquipamentoRepositorio(equipamentos);
         EquipamentoServico equipamentoServico = new EquipamentoServico(equipamentoRepositorio);
         Equipamento equipamento = new Equipamento("Machado", "Manual");
-        equipamentoServico.cadastra(equipamento);
+        equipamentoServico.adicionar(equipamento);
         equipamentoServico.listar();
 
         System.out.println(" ");
@@ -44,7 +44,7 @@ public class Main {
         Aluguel aluguel = new Aluguel(200);
 
         aluguelServico.calcularManutencao(aluguel);
-        aluguelServico.adicionar(aluguel);
+        aluguelServico.salvar(aluguel);
         aluguelServico.listar();
         
         System.out.println(" ");

@@ -11,7 +11,7 @@ public class AluguelServico{
         this.aluguelRepositorio = aluguelRepositorio;
     }
     
-    public void adicionar(Aluguel aluguel){
+    public void salvar(Aluguel aluguel){
         aluguelRepositorio.salvar(aluguel);
     }
     

@@ -11,7 +11,7 @@ public class EquipamentoServico {
         this.equipamentoRepositorio = equipamentoRepositorio;
     }
 
-    public void cadastra(Equipamento equipamento){
+    public void adicionar(Equipamento equipamento){
         equipamentoRepositorio.salvar(equipamento);
     }
 
@@ -23,7 +23,7 @@ public class EquipamentoServico {
         equipamentoRepositorio.listarEquipamento().forEach(System.out::println);
     }
 
-    public void alteraAluguel(Equipamento equipamento){
+    public void alteraNome(Equipamento equipamento){
         equipamentoRepositorio.alteraNome(equipamento);
     }
 }
