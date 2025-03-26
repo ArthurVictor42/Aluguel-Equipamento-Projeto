@@ -11,16 +11,16 @@ public class Equipamento {
         this.tipoEquipamento = tipoEquipamento;
         this.id = contID++;
     }
-    public void setNomeEquipamento(String novonomeEquipamento) {
-        this.nomeEquipamento = novonomeEquipamento;
+    public void setNomeEquipamento(String nomeEquipamento) {
+        this.nomeEquipamento = nomeEquipamento;
     }
 
     public String getNomeEquipamento() {
         return this.nomeEquipamento;
     }
 
-    public void setTipoEquipamento(String novotipoEquipamento) {
-        this.tipoEquipamento = novotipoEquipamento;
+    public void setTipoEquipamento(String tipoEquipamento) {
+        this.tipoEquipamento = tipoEquipamento;
     }
 
     public String getTipoEquipamento() {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import Entidades.Funcionario;
 
 public interface IFuncionarioFilaRepositorio {
+    // Interface do repositorio do Funcionario
     void enqueue(Funcionario funcionario);
 
     Funcionario dequeue();
