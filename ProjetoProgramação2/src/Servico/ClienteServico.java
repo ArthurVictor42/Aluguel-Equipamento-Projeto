@@ -26,4 +26,9 @@ public class ClienteServico {
     public void alteraCliente(Cliente cliente){
         clienteRepositorio.alteraNome(cliente);
     }
+
+    public void fazerAniversario(Cliente cliente){
+        cliente.setIdade(cliente.getIdade() + 1);
+            System.out.println("O(A)" + cliente.getNomeCompleto() + "esta fazendo aniversário! Agora tem " + cliente.getIdade() + " anos!");
+    }
 }

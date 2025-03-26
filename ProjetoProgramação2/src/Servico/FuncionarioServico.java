@@ -35,7 +35,12 @@ public class FuncionarioServico {
         filaRepositorio.lista().forEach(System.out::println);;
     }
 
-    public void alteraAluguel(Funcionario funcionario){
+    public void alteraCargo(Funcionario funcionario){
         filaRepositorio.alteraCargo(funcionario);
+    }
+
+    public void fazerAniversario(Funcionario funcionario){
+        funcionario.setIdade(funcionario.getIdade() + 1);
+            System.out.println("O(A) " + funcionario.getNomeCompleto() + "esta fazendo aniversário! Agora tem " + funcionario.getIdade() + " anos!");
     }
 }
