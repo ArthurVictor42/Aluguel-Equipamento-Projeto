@@ -88,18 +88,24 @@ public class Main {
         ClienteServico clienteServico = new ClienteServico(clienteRepositorio);
 
         // Solicita dados ao usuário
-        System.out.print("Digite o nome do cliente: ");
-        String nome = teclado.next();
         System.out.print("Digite a idade do cliente: ");
         int idade = teclado.nextInt();
+        teclado.nextLine();
+
+        System.out.print("Digite o nome do cliente: ");
+        String nome = teclado.nextLine();
+    
         System.out.print("Digite o CPF do cliente: ");
-        String cpf = teclado.next();
+        String cpf = teclado.nextLine();
+    
         System.out.print("Digite o telefone do cliente: ");
-        String telefone = teclado.next();
+        String telefone = teclado.nextLine();
+    
         System.out.print("Digite o email do cliente: ");
-        String email = teclado.next();
+        String email = teclado.nextLine();
+    
         System.out.print("Digite o endereço do cliente: ");
-        String endereco = teclado.next();
+        String endereco = teclado.nextLine();
                 
         Cliente cliente = new Cliente(nome, idade, cpf, telefone, email, endereco);
         clienteServico.cadastra(cliente);
@@ -128,18 +134,25 @@ public class Main {
         FuncionarioServico funcServico = new FuncionarioServico(funcionarioRepositorio);
 
         // Solicita dados ao usuário
-        System.out.print("Digite o nome do funcionário: ");
-        String nomeFun = teclado.next();
         System.out.print("Digite a idade do funcionário: ");
         int idadeFun = teclado.nextInt();
+        teclado.nextLine();
+
+        System.out.print("Digite o nome do funcionário: ");
+        String nomeFun = teclado.nextLine();
+    
         System.out.print("Digite o CPF do funcionário: ");
-        String cpfFun = teclado.next();
+        String cpfFun = teclado.nextLine();
+    
         System.out.print("Digite o telefone do funcionário: ");
-        String telefoneFun = teclado.next();
+        String telefoneFun = teclado.nextLine();
+    
         System.out.print("Digite o email do funcionário: ");
-        String emailFun = teclado.next();
+        String emailFun = teclado.nextLine();
+    
         System.out.print("Digite o cargo do funcionário: ");
-        String cargo = teclado.next();
+        String cargo = teclado.nextLine();
+    
         System.out.print("Digite o salário do funcionário: ");
         double salario = teclado.nextDouble();
 
@@ -148,9 +161,6 @@ public class Main {
         funcServico.enqueue(funcionario);
 
         funcServico.lista();
-
-        System.out.println(" ");
-        funcServico.dequeue();
     
         System.out.println(funcServico.front());
     }
