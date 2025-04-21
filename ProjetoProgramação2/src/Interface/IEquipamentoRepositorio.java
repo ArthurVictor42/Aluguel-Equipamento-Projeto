@@ -13,5 +13,7 @@ public interface IEquipamentoRepositorio {
     List<Equipamento> listar();
 
     void alterar(Equipamento equipamento);
+
+    Equipamento buscarID(int id);
     
 }

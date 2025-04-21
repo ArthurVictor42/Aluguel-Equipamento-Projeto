@@ -13,4 +13,6 @@ public interface IAluguelRepositorio {
     List<Aluguel> listar();
 
     void alterar(Aluguel aluguel);
+
+    Aluguel buscarNumero(int id);
 }

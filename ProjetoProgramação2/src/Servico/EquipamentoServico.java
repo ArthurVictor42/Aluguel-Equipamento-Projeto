@@ -32,4 +32,8 @@ public class EquipamentoServico {
     public void alteraNome(Equipamento equipamento){
         equipamentoRepositorio.alterar(equipamento);
     }
+
+    public Equipamento buscarID(int id){
+        return equipamentoRepositorio.buscarID(id);
+    }
 }

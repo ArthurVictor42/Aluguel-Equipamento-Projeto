@@ -12,5 +12,7 @@ public interface IClienteRepositorio {
     List<Cliente> listarCliente();
 
     void altera(Cliente cliente);
+
+    Cliente buscarID(int id);
     
 }

@@ -89,5 +89,27 @@ public class ClienteRepositorioJDBC implements IClienteRepositorio {
             System.out.println("Errro ao altera: " + e.getMessage());
         }
     }
+
+    public Cliente buscarID(int id) {
+        String sql = "SELECT * FROM cliente WHERE id = ?";
+        try (Connection conn = ConexaoBanco.conexao(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Cliente(
+                    rs.getInt("id"),
+                    rs.getString("nome"),
+                    rs.getDate("data_nascimento"),
+                    rs.getString("cpf"),
+                    rs.getString("telefone"),
+                    rs.getString("email"),
+                    rs.getString("endereco")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
 

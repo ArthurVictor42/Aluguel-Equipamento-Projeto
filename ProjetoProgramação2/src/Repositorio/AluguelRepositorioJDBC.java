@@ -11,7 +11,7 @@ import Interface.IAluguelRepositorio;
 public class AluguelRepositorioJDBC implements IAluguelRepositorio {
 
     public void salvar(Aluguel aluguel) {
-        String sql = "INSERT INTO aluguel (custo_aluguel, custo_manutenção) VALUES (?, ?)";
+        String sql = "INSERT INTO aluguel (custo_aluguel, custo_manutencao) VALUES (?, ?)";
 
         try (Connection conn = ConexaoBanco.conexao(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setDouble(1, aluguel.getCustoAluguel());
@@ -45,7 +45,7 @@ public class AluguelRepositorioJDBC implements IAluguelRepositorio {
                 Aluguel aluguel = new Aluguel(
                     rs.getInt("numero_aluguel"),
                     rs.getDouble("custo_aluguel"),
-                    rs.getDouble("custo_manutenção")
+                    rs.getDouble("custo_manutencao")
                 );
                 lista.add(aluguel);
             }
@@ -69,5 +69,23 @@ public class AluguelRepositorioJDBC implements IAluguelRepositorio {
         } catch (Exception e) {
             System.out.println("Erro ao atualizar aluguel: " + e.getMessage());
         }
+    }
+
+    public Aluguel buscarNumero(int numero) {
+        String sql = "SELECT * FROM aluguel WHERE numero = ?";
+        try (Connection conn = ConexaoBanco.conexao(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, numero);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Aluguel(
+                    rs.getInt("numero_aluguel"),
+                    rs.getDouble("custo_aluguel"), 
+                    rs.getDouble("custo_manutencao")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

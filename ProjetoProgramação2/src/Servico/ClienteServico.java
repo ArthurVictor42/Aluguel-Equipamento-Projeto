@@ -32,4 +32,8 @@ public class ClienteServico {
     public void alteraCliente(Cliente cliente){
         clienteRepositorio.altera(cliente);
     }
+
+    public Cliente buscarID(int id){
+        return clienteRepositorio.buscarID(id);
+    }
 }

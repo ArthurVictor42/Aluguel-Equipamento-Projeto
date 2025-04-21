@@ -33,5 +33,7 @@ public class AluguelServico{
         aluguelRepositorio.alterar(aluguel);
     }
 
-
+    public Aluguel buscarNumero(int id){
+        return aluguelRepositorio.buscarNumero(id);
+    }
 }

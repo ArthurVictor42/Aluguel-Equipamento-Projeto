@@ -17,5 +17,7 @@ public interface IFuncionarioFilaRepositorio {
 
     ArrayList<Funcionario> lista();
 
-    void alteraCargo(Funcionario funcionario);
+    boolean alterarFuncionario(Funcionario funcionario);
+
+    boolean removePorId(int id);
 }

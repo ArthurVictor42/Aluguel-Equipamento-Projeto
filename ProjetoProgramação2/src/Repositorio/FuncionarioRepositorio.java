@@ -44,12 +44,26 @@ public class FuncionarioRepositorio implements IFuncionarioFilaRepositorio {
     }
 
     // Altera informação do objeto da fila
-    public void alteraCargo(Funcionario funcionario){
-        for(Funcionario fun: filafuncionario.lista()){
-            if(fun.getCargo().equals(funcionario.getCargo())){
-                fun.setCargo(funcionario.getCargo());
-                break;
+    public boolean alterarFuncionario(Funcionario funcionarioAtualizado) {
+        ArrayList<Funcionario> lista = filafuncionario.lista();
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getId() == funcionarioAtualizado.getId()) {
+                lista.set(i, funcionarioAtualizado); // Substitui o antigo pelo novo
+                return true;
             }
         }
+        return false;
+    }
+
+    // Remove um funcionário pelo ID
+    public boolean removePorId(int id) {
+        ArrayList<Funcionario> lista = filafuncionario.lista();
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getId() == id) {
+                lista.remove(i);
+                return true; // Removido com sucesso
+            }
+        }
+        return false; // Não encontrado
     }
 }

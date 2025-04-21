@@ -43,8 +43,11 @@ public class FuncionarioServico {
     }
 
     // Metodo pra altera a informação do objeto salvo na fila
-    public void alteraCargo(Funcionario funcionario){
-        filaRepositorio.alteraCargo(funcionario);
+    public boolean alterarFuncionario(Funcionario funcionario){
+        return filaRepositorio.alterarFuncionario(funcionario);
     }
 
+    public boolean buscarID(int id){
+        return filaRepositorio.removePorId(id);
+    }
 }
