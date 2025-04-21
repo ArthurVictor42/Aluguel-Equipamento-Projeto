@@ -7,15 +7,15 @@ import java.util.List;
 import java.util.Scanner;
 
 import Entidades.Cliente;
-import Repositorio.ClienteRepositorio;
+import Repositorio.ClienteRepositorioJDBC;
 import Servico.ClienteServico;
 
 import Entidades.Aluguel;
-import Repositorio.AluguelRepositorio;
+import Repositorio.AluguelRepositorioJDBC;
 import Servico.AluguelServico;
 
 import Entidades.Equipamento;
-import Repositorio.EquipamentoRepositorio;
+import Repositorio.EquipamentoRepositorioJDBC;
 import Servico.EquipamentoServico;
 
 import Entidades.Funcionario;
@@ -26,13 +26,13 @@ public class Main {
     public static Scanner teclado = new Scanner(System.in);
 
     // Iniciação dos repositórios com JDBC
-    public static EquipamentoRepositorio equipamentoRepo = new EquipamentoRepositorio();
+    public static EquipamentoRepositorioJDBC equipamentoRepo = new EquipamentoRepositorioJDBC();
     public static EquipamentoServico equipamentoServico = new EquipamentoServico(equipamentoRepo);
 
-    public static ClienteRepositorio clienteRepositorio = new ClienteRepositorio();
+    public static ClienteRepositorioJDBC clienteRepositorio = new ClienteRepositorioJDBC();
     public static ClienteServico clienteServico = new ClienteServico(clienteRepositorio);
 
-    public static AluguelRepositorio aluguelRepositorio = new AluguelRepositorio();
+    public static AluguelRepositorioJDBC aluguelRepositorio = new AluguelRepositorioJDBC();
     public static AluguelServico aluguelServico = new AluguelServico(aluguelRepositorio);
 
     // Funcionário permanece sem JDBC
