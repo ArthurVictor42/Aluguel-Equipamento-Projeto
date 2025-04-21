@@ -1,5 +1,7 @@
 package Servico;
 
+import java.util.ArrayList;
+import java.util.List;
 import Entidades.Equipamento;
 import Repositorio.EquipamentoRepositorio;
 import Interface.IEquipamentoRepositorio;
@@ -17,17 +19,17 @@ public class EquipamentoServico {
     }
 
     // Metodo pra chama o remover do repositorio
-    public void excluir(Equipamento equipamento){
-        equipamentoRepositorio.remover(equipamento);
+    public void excluir(int id){
+        equipamentoRepositorio.remover(id);
     }
 
     // Metodo pra chama o listar do repositorio
-    public void listar(){
-        equipamentoRepositorio.listarEquipamento().forEach(System.out::println);
+    public List<Equipamento> listar(){
+        return equipamentoRepositorio.listar();
     }
 
     // Metodo pra chama o altera do repositorio
     public void alteraNome(Equipamento equipamento){
-        equipamentoRepositorio.alteraNome(equipamento);
+        equipamentoRepositorio.alterar(equipamento);
     }
 }

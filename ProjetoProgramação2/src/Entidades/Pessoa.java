@@ -1,18 +1,20 @@
 package Entidades;
-
+import java.util.Date;
 public abstract class Pessoa {
     private String nomeCompleto;
-    private int idade;
+    private Date dataNascimento;
     private String cpf;
     private String celular;
     private String email;
+    private int id;
 
-    public Pessoa(String nomeCompleto, int idade, String cpf, String celular, String email){
+    public Pessoa(int id, String nomeCompleto, Date dataNascimento, String cpf, String celular, String email){
         this.nomeCompleto = nomeCompleto;
-        this.idade = idade;
+        this.dataNascimento = dataNascimento;
         this.cpf = cpf;
         this.celular = celular; 
         this.email = email;
+        this.id = id;
     }
 
     public void setNomeCompleto(String novonomeCompleto) {
@@ -23,12 +25,12 @@ public abstract class Pessoa {
         return this.nomeCompleto;
     }
 
-    public void setIdade(int novaidade) {
-        this.idade = novaidade;
+    public void setDataNascimento(Date novaData) {
+        this.dataNascimento = novaData;
     }
 
-    public int getIdade() {
-        return this.idade;
+    public Date getDatanascimento() {
+        return this.dataNascimento;
     }
 
     public void setEmail(String novoemail) {
@@ -53,5 +55,13 @@ public abstract class Pessoa {
 
     public String getCelular() {
         return this.celular;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return this.id;
     }
 }

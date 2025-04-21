@@ -1,0 +1,73 @@
+package Repositorio;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import Entidades.Aluguel;
+import Conexao.ConexaoBanco;
+import Interface.IAluguelRepositorio;
+
+public class AluguelRepositorio implements IAluguelRepositorio {
+
+    public void salvar(Aluguel aluguel) {
+        String sql = "INSERT INTO aluguel (custo_aluguel, custo_manutenção) VALUES (?, ?)";
+
+        try (Connection conn = ConexaoBanco.conexao(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setDouble(1, aluguel.getCustoAluguel());
+            stmt.setDouble(2, aluguel.getCustoManutencao());
+
+            stmt.executeUpdate();
+            System.out.println("Aluguel cadastrado com sucesso!");
+        } catch (Exception e) {
+            System.out.println("Erro ao inserir aluguel: " + e.getMessage());
+        }
+    }
+
+    public void remover(int id) {
+        String sql = "DELETE FROM aluguel WHERE numero_aluguel = ?";
+
+        try (Connection conn = ConexaoBanco.conexao(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+            System.out.println("Aluguel removido com sucesso!");
+        } catch (Exception e) {
+            System.out.println("Erro ao remover aluguel: " + e.getMessage());
+        }
+    }
+
+    public List<Aluguel> listar() {
+        List<Aluguel> lista = new ArrayList<>();
+        String sql = "SELECT * FROM aluguel";
+
+        try (Connection conn = ConexaoBanco.conexao(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Aluguel aluguel = new Aluguel(
+                    rs.getInt("numero_aluguel"),
+                    rs.getDouble("custo_aluguel"),
+                    rs.getDouble("custo_manutenção")
+                );
+                lista.add(aluguel);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao listar aluguéis: " + e.getMessage());
+        }
+
+        return lista;
+    }
+
+    public void alterar(Aluguel aluguel) {
+        String sql = "UPDATE aluguel SET custo_aluguel = ?, custo_manutenção = ? WHERE numero_aluguel = ?";
+
+        try (Connection conn = ConexaoBanco.conexao(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setDouble(1, aluguel.getCustoAluguel());
+            stmt.setDouble(2, aluguel.getCustoManutencao());
+            stmt.setInt(3, aluguel.getNumeroAluguel());
+
+            stmt.executeUpdate();
+            System.out.println("Aluguel atualizado com sucesso!");
+        } catch (Exception e) {
+            System.out.println("Erro ao atualizar aluguel: " + e.getMessage());
+        }
+    }
+}

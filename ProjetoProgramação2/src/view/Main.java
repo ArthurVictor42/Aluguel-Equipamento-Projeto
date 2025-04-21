@@ -1,6 +1,9 @@
 package view;
 
-import java.util.ArrayList;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Scanner;
 
 import Entidades.Cliente;
@@ -21,148 +24,310 @@ import Servico.FuncionarioServico;
 
 public class Main {
     public static Scanner teclado = new Scanner(System.in);
+
+    // Iniciação dos repositórios com JDBC
+    public static EquipamentoRepositorio equipamentoRepo = new EquipamentoRepositorio();
+    public static EquipamentoServico equipamentoServico = new EquipamentoServico(equipamentoRepo);
+
+    public static ClienteRepositorio clienteRepositorio = new ClienteRepositorio();
+    public static ClienteServico clienteServico = new ClienteServico(clienteRepositorio);
+
+    public static AluguelRepositorio aluguelRepositorio = new AluguelRepositorio();
+    public static AluguelServico aluguelServico = new AluguelServico(aluguelRepositorio);
+
+    // Funcionário permanece sem JDBC
+    public static FuncionarioRepositorio funcionarioRepositorio = new FuncionarioRepositorio();
+    public static FuncionarioServico funcServico = new FuncionarioServico(funcionarioRepositorio);
+
     public static void main(String[] args) {
         int opcao = 0;
 
         while(opcao != 5){
-
-            // Menu de escolha do usuario
             System.out.println("\n === Menu de escolha ===");
-            System.out.println("Se você deseja cadastra um equipamento digite 1");
-            System.out.println("Se você deseja cadastra um Cliente, digite 2");
-            System.out.println("Se você deseja cadastra um Aluguel, digite 3");
-            System.out.println("Se você deseja cadastra um Funcionario, digite 4");
-            System.out.println("Caso queira encerra o programa, digite 5");
+            System.out.println("1 - Gerenciar Equipamentos");
+            System.out.println("2 - Gerenciar Clientes");
+            System.out.println("3 - Gerenciar Aluguéis");
+            System.out.println("4 - Gerenciar Funcionários");
+            System.out.println("5 - Encerrar");
             System.out.print("Sua escolha: ");
             opcao = teclado.nextInt();
             
-            // Chama os metodos resprequitivo de cada escolha
             switch(opcao){
-                case 1:
-                    CadastraEquipamento();
+                case 1: 
+                    menuEquipamento(); 
                     break;
-                case 2:
-                    CadastraCliente();
+                case 2: 
+                    menuCliente(); 
                     break;
-                case 3: 
-                    CadastraAluguel();
+                case 3:     
+                    menuAluguel(); 
                     break;
-                case 4:
-                    CadastraFuncionario();
+                case 4:  
+                    menuFuncionario(); 
                     break;
-                case 5:
-                    System.out.println("Encerrando o cadastro");
-                    break;  
-                default:
-                    System.out.println("Opção Invalida");
-                    break;              
+                case 5: 
+                    System.out.println("Sistema Encerrado com sucesso!"); 
+                    break;
+                default: 
+                    System.out.println("Opção Inválida."); 
+                    break;
             }
-    
         }
 
-        System.out.println("O Programa foi encerrado com sucesso!");
         teclado.close();
     }
 
+    // === Equipamento ===
+    public static void menuEquipamento(){
+        int opcao = 0;
+        while(opcao != 3){
+            System.out.println("\n=== Menu Equipamento ===");
+            System.out.println("1 - Cadastrar");
+            System.out.println("2 - Listar");
+            System.out.println("3 - Voltar");
+            System.out.print("Sua escolha: ");
+            opcao = teclado.nextInt();
+
+            switch (opcao) {
+                case 1: 
+                    CadastraEquipamento(); 
+                    break;
+                case 2: 
+                    listarEquipamento(); 
+                    break;
+                case 3:
+                    System.out.println("Voltando ao menu principal!"); 
+                    break;
+                default: 
+                    System.out.println("Opção inválida."); 
+                    break;  
+            }
+        }
+    }
+
     public static void CadastraEquipamento(){
-        // Criação do Objeto Equipamento
-        ArrayList<Equipamento> equipamentos = new ArrayList<>();
-        EquipamentoRepositorio equipamentoRepositorio = new EquipamentoRepositorio(equipamentos);
-        EquipamentoServico equipamentoServico = new EquipamentoServico(equipamentoRepositorio);
-        
-        // Solicita dados ao usuário
+        System.out.println("Digite o id: ");
+        int id = teclado.nextInt();
+        teclado.nextLine();
+
         System.out.print("Digite o nome do equipamento: ");
         String nome = teclado.next();
+
         System.out.print("Digite o tipo do equipamento: ");
         String tipo = teclado.next();
-        
-        Equipamento equipamento = new Equipamento(nome, tipo);
+
+        Equipamento equipamento = new Equipamento(id, nome, tipo);
         equipamentoServico.adicionar(equipamento);
-        equipamentoServico.listar();
+    }
+
+    public static void listarEquipamento() {
+        List<Equipamento> equipamentos = equipamentoServico.listar();
+        if (equipamentos.isEmpty()) {
+            System.out.println("Nenhum equipamento encontrado.");
+        } else {
+            for (Equipamento eq : equipamentos) {
+                System.out.println(eq);
+            }
+        }
+    }
+
+    // === Cliente ===
+    public static void menuCliente(){
+        int opcao = 0;
+        while(opcao != 3){
+            System.out.println("\n=== Menu Cliente ===");
+            System.out.println("1 - Cadastrar");
+            System.out.println("2 - Listar");
+            System.out.println("3 - Voltar");
+            System.out.print("Sua escolha: ");
+            opcao = teclado.nextInt();
+
+            switch (opcao) {
+                case 1: 
+                    CadastraCliente(); 
+                    break;
+                case 2: 
+                    listarCliente(); 
+                    break;
+                case 3:
+                    System.out.println("Voltando ao menu principal!"); 
+                    break;
+                default: 
+                    System.out.println("Opção inválida."); 
+                    break;
+            }
+        }
     }
 
     public static void CadastraCliente(){
-        // Criação do objeto Cliente
-        ArrayList<Cliente> clientes = new ArrayList<>();
-        ClienteRepositorio clienteRepositorio = new ClienteRepositorio(clientes);
-        ClienteServico clienteServico = new ClienteServico(clienteRepositorio);
-
-        // Solicita dados ao usuário
-        System.out.print("Digite a idade do cliente: ");
-        int idade = teclado.nextInt();
+        System.out.print("Digite o ID do cliente: ");
+        int id = teclado.nextInt();
         teclado.nextLine();
 
-        System.out.print("Digite o nome do cliente: ");
+        System.out.print("Digite a data de nascimento (dd/MM/yyyy): ");
+        String data = teclado.nextLine();
+        Date dataNascimento = null;
+        try {
+            dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(data);
+        } catch (ParseException e) {
+            System.out.println("Data inválida!");
+            return;
+        }
+
+        System.out.print("Nome: ");
         String nome = teclado.nextLine();
-    
-        System.out.print("Digite o CPF do cliente: ");
+        System.out.print("CPF: ");
         String cpf = teclado.nextLine();
-    
-        System.out.print("Digite o telefone do cliente: ");
+        System.out.print("Telefone: ");
         String telefone = teclado.nextLine();
-    
-        System.out.print("Digite o email do cliente: ");
+        System.out.print("Email: ");
         String email = teclado.nextLine();
-    
-        System.out.print("Digite o endereço do cliente: ");
+        System.out.print("Endereço: ");
         String endereco = teclado.nextLine();
-                
-        Cliente cliente = new Cliente(nome, idade, cpf, telefone, email, endereco);
+
+        Cliente cliente = new Cliente(id, nome, dataNascimento, cpf, telefone, email, endereco);
         clienteServico.cadastra(cliente);
-        clienteServico.listar();
+    }
+
+    public static void listarCliente(){
+        List<Cliente> clientes = clienteServico.listar();
+        if (clientes.isEmpty()) {
+            System.out.println("Nenhum cliente encontrado.");
+        } else {
+            for (Cliente cli : clientes) {
+                System.out.println(cli);
+            }
+        } 
+    }
+
+    // === Aluguel ===
+    public static void menuAluguel(){
+        int opcao = 0;
+        while(opcao != 3){
+            System.out.println("\n=== Menu Aluguel ===");
+            System.out.println("1 - Cadastrar");
+            System.out.println("2 - Listar");
+            System.out.println("3 - Voltar");
+            System.out.print("Sua escolha: ");
+            opcao = teclado.nextInt();
+
+            switch (opcao) {
+                case 1: 
+                    CadastraAluguel(); 
+                    break;
+                case 2: 
+                    listarAluguel(); 
+                    break;
+                case 3:
+                    System.out.println("Voltando ao menu principal!"); 
+                    break;
+                default: 
+                    System.out.println("Opção inválida."); 
+                    break; 
+            }
+        }
     }
 
     public static void CadastraAluguel(){
-        // Criação do objeto Aluguel
-        ArrayList<Aluguel> algueis = new ArrayList<>();
-        AluguelRepositorio aluguelRepositorio = new AluguelRepositorio(algueis);
-        AluguelServico aluguelServico = new AluguelServico(aluguelRepositorio);
-        
-        // Solicita dados ao usuário
+        System.out.println("Digite o numero do aluguel: ");
+        int numero = teclado.nextInt();
+        teclado.nextLine();
+
         System.out.print("Digite o valor do aluguel: ");
         double valor = teclado.nextDouble();
-                
-        Aluguel aluguel = new Aluguel(valor);
-        aluguelServico.calcularManutencao(aluguel);
+        teclado.nextLine();
+
+        System.out.println("Digite o valor de manutenção: ");
+        double manutencao = teclado.nextDouble();
+
+        Aluguel aluguel = new Aluguel(numero, valor, manutencao); 
         aluguelServico.salvar(aluguel);
-        aluguelServico.listar();
+    }
+
+    public static void listarAluguel(){
+        List<Aluguel> alugueis = aluguelServico.listar();
+        if (alugueis.isEmpty()) {
+            System.out.println("Nenhum aluguel encontrado.");
+        } else {
+            for (Aluguel aluguel : alugueis) {
+                System.out.println(aluguel);
+            }
+        }
+    }
+
+    // === Funcionário (sem JDBC) ===
+    public static void menuFuncionario(){
+        int opcao = 0;
+        while(opcao != 3){
+            System.out.println("\n=== Menu Funcionário ===");
+            System.out.println("1 - Cadastrar");
+            System.out.println("2 - Listar");
+            System.out.println("3 - Voltar");
+            System.out.print("Sua escolha: ");
+            opcao = teclado.nextInt();
+
+            switch (opcao) {
+                case 1: 
+                    CadastraFuncionario(); 
+                    break;
+                case 2: 
+                    listarFuncionario(); 
+                    break;
+                case 3:
+                    System.out.println("Voltando ao menu principal!"); 
+                    break;
+                default: 
+                    System.out.println("Opção inválida."); 
+                    break; 
+            }
+        }
     }
 
     public static void CadastraFuncionario(){
-        // Criando o Objeto Funcionarios usando Fila com ArrayList
-        FuncionarioRepositorio funcionarioRepositorio = new FuncionarioRepositorio();
-        FuncionarioServico funcServico = new FuncionarioServico(funcionarioRepositorio);
-
-        // Solicita dados ao usuário
-        System.out.print("Digite a idade do funcionário: ");
-        int idadeFun = teclado.nextInt();
+        System.out.print("ID: ");
+        int id = teclado.nextInt();
         teclado.nextLine();
 
-        System.out.print("Digite o nome do funcionário: ");
-        String nomeFun = teclado.nextLine();
-    
-        System.out.print("Digite o CPF do funcionário: ");
-        String cpfFun = teclado.nextLine();
-    
-        System.out.print("Digite o telefone do funcionário: ");
-        String telefoneFun = teclado.nextLine();
-    
-        System.out.print("Digite o email do funcionário: ");
-        String emailFun = teclado.nextLine();
-    
-        System.out.print("Digite o cargo do funcionário: ");
+        System.out.print("Data de nascimento (dd/MM/yyyy): ");
+        String data = teclado.nextLine();
+        Date dataNascimento = null;
+        try {
+            dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(data);
+        } catch (ParseException e) {
+            System.out.println("Data inválida!");
+            return;
+        }
+
+        System.out.print("Nome: ");
+        String nome = teclado.nextLine();
+
+        System.out.print("CPF: ");
+        String cpf = teclado.nextLine();
+
+        System.out.print("Telefone: ");
+        String telefone = teclado.nextLine();
+
+        System.out.print("Email: ");
+        String email = teclado.nextLine();
+
+        System.out.print("Cargo: ");
         String cargo = teclado.nextLine();
-    
-        System.out.print("Digite o salário do funcionário: ");
+
+        System.out.print("Salário: ");
         double salario = teclado.nextDouble();
 
-        Funcionario funcionario = new Funcionario(nomeFun, idadeFun, cpfFun, telefoneFun, emailFun, cargo, salario);
-        
+        Funcionario funcionario = new Funcionario(id, nome, dataNascimento, cpf, telefone, email, cargo, salario);
         funcServico.enqueue(funcionario);
+    }
 
-        funcServico.lista();
-    
-        System.out.println(funcServico.front());
+    public static void listarFuncionario(){
+        List<Funcionario> funcionarios = funcServico.lista(); 
+        if(funcionarios.isEmpty()){
+            System.out.println("Nenhum funcionário encontrado.");
+        } else {
+            for(Funcionario f : funcionarios){
+                System.out.println(f);
+            }
+        }
     }
 }
-

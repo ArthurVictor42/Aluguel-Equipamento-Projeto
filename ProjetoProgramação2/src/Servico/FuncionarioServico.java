@@ -3,6 +3,7 @@ package Servico;
 import Entidades.Funcionario;
 import Interface.IFuncionarioFilaRepositorio;
 import Repositorio.FuncionarioRepositorio;
+import java.util.ArrayList;
 
 public class FuncionarioServico {
     private IFuncionarioFilaRepositorio filaRepositorio;
@@ -37,8 +38,8 @@ public class FuncionarioServico {
     }
 
     // Chama o metodo de listar os elementos da fila
-    public void lista(){
-        filaRepositorio.lista().forEach(System.out::println);;
+    public ArrayList<Funcionario> lista(){
+        return filaRepositorio.lista();
     }
 
     // Metodo pra altera a informação do objeto salvo na fila
@@ -46,9 +47,4 @@ public class FuncionarioServico {
         filaRepositorio.alteraCargo(funcionario);
     }
 
-    // metodo pra aumenta a idade do funcionario
-    public void fazerAniversario(Funcionario funcionario){
-        funcionario.setIdade(funcionario.getIdade() + 1);
-            System.out.println("O(A) " + funcionario.getNomeCompleto() + "esta fazendo aniversário! Agora tem " + funcionario.getIdade() + " anos!");
-    }
 }

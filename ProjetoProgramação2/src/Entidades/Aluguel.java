@@ -4,11 +4,11 @@ public class Aluguel {
     private double custoAluguel;
     private double custoManutencao;
     private int numeroAluguel;
-    private static int autoIncremento = 1;
+    
 
-    public Aluguel(double custoAluguel){
+    public Aluguel(int numeroAluguel, double custoAluguel, double custoManutencao){
         this.custoAluguel = custoAluguel;
-        this.numeroAluguel = autoIncremento++;
+        this.numeroAluguel = numeroAluguel;
     }
 
     public void setCustoAluguel(double novocustoAluguel) {

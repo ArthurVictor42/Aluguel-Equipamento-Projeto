@@ -1,16 +1,17 @@
 package Interface;
 
 import Entidades.Equipamento;
+import java.util.List;
 import java.util.ArrayList;
 
 public interface IEquipamentoRepositorio {
     // Interface do repositorio do Equipamento
     void salvar(Equipamento equipamento);
 
-    boolean remover(Equipamento Equipamento);
+    void remover(int id);
 
-    ArrayList<Equipamento> listarEquipamento();
+    List<Equipamento> listar();
 
-    void alteraNome(Equipamento equipamento);
+    void alterar(Equipamento equipamento);
     
 }

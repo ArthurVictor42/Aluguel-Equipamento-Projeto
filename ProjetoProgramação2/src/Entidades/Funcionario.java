@@ -1,17 +1,16 @@
 package Entidades;
 
+import java.util.Date;
+
 public class Funcionario extends Pessoa {
     private String cargo;
     private double salario;
-    private int ID;
-    private static int contID = 1;
 
-    public Funcionario(String nome, int idade, String cpf, String celular, String email, String cargo, double salario){
-        super(nome, idade, cpf, celular, email);
+    public Funcionario(int id, String nome, Date dataNascimento, String cpf, String celular, String email, String cargo, double salario){
+        super(id, nome, dataNascimento, cpf, celular, email);
         this.cargo = cargo;
         this.salario = salario;
 
-        this.ID = contID++;
     }
 
     public void setCargo(String cargo) {
@@ -20,14 +19,6 @@ public class Funcionario extends Pessoa {
 
     public String getCargo() {
         return this.cargo;
-    }
-
-    public void setID(int iD) {
-        ID = iD;
-    }
-
-    public int getID() {
-        return this.ID;
     }
 
     public void setSalario(double salario) {
@@ -40,7 +31,7 @@ public class Funcionario extends Pessoa {
 
     @Override
     public String toString() {
-        return "Funcionario [ID=" + ID + ", Nome=" + getNomeCompleto() + ", Idade=" + getIdade() + ", CPF=" + getCpf() + ", Celular=" + getCelular() + ", Email=" + getEmail() + ", Cargo=" + getCargo() + ", Salario=" + getSalario() + "]";
+        return "Funcionario [ID=" + getId() + ", Nome=" + getNomeCompleto() + ", Data de Nascimento=" + getDatanascimento() + ", CPF=" + getCpf() + ", Celular=" + getCelular() + ", Email=" + getEmail() + ", Cargo=" + getCargo() + ", Salario=" + getSalario() + "]";
     }
 
 }

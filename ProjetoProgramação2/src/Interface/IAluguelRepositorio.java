@@ -1,15 +1,16 @@
 package Interface;
 
 import Entidades.Aluguel;
+import java.util.List;
 import java.util.ArrayList;
 
 public interface IAluguelRepositorio {
     // Interface do repositorio do Aluguel
     void salvar(Aluguel aluguel);
 
-    boolean remover(Aluguel aluguel);
+    void remover(int id);
 
-    ArrayList<Aluguel> listarAluguel();
+    List<Aluguel> listar();
 
-    void alteraAluguel(Aluguel aluguel);
+    void alterar(Aluguel aluguel);
 }
