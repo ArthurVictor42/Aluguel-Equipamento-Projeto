@@ -8,7 +8,7 @@ import Entidades.Cliente;
 import Conexao.ConexaoBanco;
 import Interface.IClienteRepositorio;
 
-public class ClienteRepositorio implements IClienteRepositorio {
+public class ClienteRepositorioJDBC implements IClienteRepositorio {
     
     // Metodo pra salvar a informação do cliente Banco de dados
     public void salvar(Cliente cliente){

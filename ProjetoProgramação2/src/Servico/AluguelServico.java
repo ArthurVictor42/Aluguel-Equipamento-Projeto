@@ -3,13 +3,13 @@ package Servico;
 import java.util.ArrayList;
 import java.util.List;
 import Entidades.Aluguel;
-import Repositorio.AluguelRepositorio;
+import Repositorio.AluguelRepositorioJDBC;
 import Interface.IAluguelRepositorio;
 
 public class AluguelServico{
     private IAluguelRepositorio aluguelRepositorio;
     
-    public AluguelServico(AluguelRepositorio aluguelRepositorio){
+    public AluguelServico(AluguelRepositorioJDBC aluguelRepositorio){
         this.aluguelRepositorio = aluguelRepositorio;
     }
     
@@ -32,13 +32,6 @@ public class AluguelServico{
     public void alteraAluguel(Aluguel aluguel){
         aluguelRepositorio.alterar(aluguel);
     }
-
-    // Metodo pra calcular o custo de manutenção do equipamento
-    public void calcularManutencao(Aluguel Aluguel){
-        double calculo = 0;
-        calculo = (Aluguel.getCustoAluguel() * 50) / 100;
-        Aluguel.setCustoManutençao(calculo);
-    } 
 
 
 }

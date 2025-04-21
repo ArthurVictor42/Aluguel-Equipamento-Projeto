@@ -3,13 +3,13 @@ package Servico;
 import java.util.ArrayList;
 import java.util.List;
 import Entidades.Cliente;
-import Repositorio.ClienteRepositorio;
+import Repositorio.ClienteRepositorioJDBC;
 import Interface.IClienteRepositorio;
 
 public class ClienteServico {
     private IClienteRepositorio clienteRepositorio;
 
-    public ClienteServico(ClienteRepositorio clienteRepositorio){
+    public ClienteServico(ClienteRepositorioJDBC clienteRepositorio){
         this.clienteRepositorio = clienteRepositorio;
     }
 

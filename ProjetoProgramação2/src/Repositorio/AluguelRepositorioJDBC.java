@@ -8,7 +8,7 @@ import Entidades.Aluguel;
 import Conexao.ConexaoBanco;
 import Interface.IAluguelRepositorio;
 
-public class AluguelRepositorio implements IAluguelRepositorio {
+public class AluguelRepositorioJDBC implements IAluguelRepositorio {
 
     public void salvar(Aluguel aluguel) {
         String sql = "INSERT INTO aluguel (custo_aluguel, custo_manutenção) VALUES (?, ?)";

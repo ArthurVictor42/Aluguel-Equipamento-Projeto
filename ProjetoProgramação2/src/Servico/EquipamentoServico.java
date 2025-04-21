@@ -3,13 +3,13 @@ package Servico;
 import java.util.ArrayList;
 import java.util.List;
 import Entidades.Equipamento;
-import Repositorio.EquipamentoRepositorio;
+import Repositorio.EquipamentoRepositorioJDBC;
 import Interface.IEquipamentoRepositorio;
 
 public class EquipamentoServico {
     private IEquipamentoRepositorio equipamentoRepositorio;
 
-    public EquipamentoServico(EquipamentoRepositorio equipamentoRepositorio){
+    public EquipamentoServico(EquipamentoRepositorioJDBC equipamentoRepositorio){
         this.equipamentoRepositorio = equipamentoRepositorio;
     }
 
