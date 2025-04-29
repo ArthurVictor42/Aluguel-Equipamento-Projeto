@@ -182,15 +182,15 @@ public class Main {
             System.out.println("Dados atuais:");
             System.out.println(eq);
     
-            System.out.println("\nInsira os novos dados (pressione ENTER para manter o valor atual):");
+            System.out.println("\nInsira os novos dados (ENTER para manter o valor atual):");
     
-            System.out.print("Nome [" + eq.getNomeEquipamento() + "]: ");
+            System.out.print("Nome " + eq.getNomeEquipamento() + ": ");
             String nome = teclado.nextLine();
             if (!nome.isEmpty()){
                 eq.setNomeEquipamento(nome);
             } 
 
-            System.out.print("Tipo [" + eq.getTipoEquipamento() + "]: ");
+            System.out.print("Tipo " + eq.getTipoEquipamento() + ": ");
             String tipo = teclado.nextLine();
             if (!tipo.isEmpty()) {
                 eq.setTipoEquipamento(tipo);
@@ -480,7 +480,7 @@ public class Main {
             System.out.println("Dados atuais:");
             System.out.println(aluguel);
     
-            System.out.println("\nInsira os novos dados (pressione ENTER para manter o valor atual):");
+            System.out.println("\nInsira os novos dados ( ENTER para manter o valor atual):");
     
             System.out.print("Valor [" + aluguel.getCustoAluguel() + "]: ");
             String valorStr = teclado.nextLine();
