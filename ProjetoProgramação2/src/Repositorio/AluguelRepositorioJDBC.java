@@ -57,7 +57,7 @@ public class AluguelRepositorioJDBC implements IAluguelRepositorio {
     }
 
     public void alterar(Aluguel aluguel) {
-        String sql = "UPDATE aluguel SET custo_aluguel = ?, custo_manutenção = ? WHERE numero_aluguel = ?";
+        String sql = "UPDATE aluguel SET custo_aluguel = ?, custo_manutencao = ? WHERE numero_aluguel = ?";
 
         try (Connection conn = ConexaoBanco.conexao(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setDouble(1, aluguel.getCustoAluguel());

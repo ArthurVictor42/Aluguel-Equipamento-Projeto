@@ -196,7 +196,7 @@ public class Main {
                 eq.setTipoEquipamento(tipo);
             }
 
-            equipamentoServico.alteraNome(eq);
+            equipamentoServico.alteraEquipamento(eq);
             System.out.println("Equipamento atualizado com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro ao atualizar equipamento: " + e.getMessage());

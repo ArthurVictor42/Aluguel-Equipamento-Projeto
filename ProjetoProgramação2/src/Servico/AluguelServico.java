@@ -15,7 +15,11 @@ public class AluguelServico{
     
     // Metodo pra chama o salvar do repositorio
     public void salvar(Aluguel aluguel){
-        aluguelRepositorio.salvar(aluguel);
+        if (aluguel.getCustoAluguel() <= 0) {
+            System.out.println("Custo do aluguel deve ser maior que zero");
+        } else {
+            aluguelRepositorio.salvar(aluguel);
+        }
     }
     
     // Metodo pra chama o remover do repositorio
@@ -30,7 +34,11 @@ public class AluguelServico{
 
     // Metodo pra chama o altera do repositorio
     public void alteraAluguel(Aluguel aluguel){
-        aluguelRepositorio.alterar(aluguel);
+        if (aluguel.getCustoAluguel() <= 0) {
+            System.out.println("Custo do aluguel deve ser maior que zero");
+        } else {
+            aluguelRepositorio.alterar(aluguel);
+        }
     }
 
     public Aluguel buscarNumero(int id){

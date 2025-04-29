@@ -15,7 +15,11 @@ public class EquipamentoServico {
 
     // Metodo pra chama o salvar do repositorio
     public void adicionar(Equipamento equipamento){
-        equipamentoRepositorio.salvar(equipamento);
+        if (equipamento.getTipoEquipamento() == null || equipamento.getTipoEquipamento().isEmpty()) {
+            System.out.println("Tipo de equipamento não pode ser nulo ou vazio");
+        } else {
+            equipamentoRepositorio.salvar(equipamento);
+        }
     }
 
     // Metodo pra chama o remover do repositorio
@@ -29,8 +33,12 @@ public class EquipamentoServico {
     }
 
     // Metodo pra chama o altera do repositorio
-    public void alteraNome(Equipamento equipamento){
-        equipamentoRepositorio.alterar(equipamento);
+    public void alteraEquipamento(Equipamento equipamento){
+        if (equipamento.getTipoEquipamento() == null || equipamento.getTipoEquipamento().isEmpty()) {
+            System.out.println("Tipo de equipamento não pode ser nulo ou vazio");
+        } else {
+            equipamentoRepositorio.alterar(equipamento);
+        }
     }
 
     public Equipamento buscarID(int id){

@@ -78,9 +78,9 @@ public class EquipamentoRepositorioJDBC implements IEquipamentoRepositorio {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return new Equipamento(
-                    rs.getInt("id"),
-                    rs.getString("nome"),
-                    rs.getString("tipo")
+                    rs.getInt("id_equipamento"),
+                    rs.getString("nome_equipamento"),
+                    rs.getString("tipo_equipamento")
                 );
             }
         } catch (SQLException e) {
