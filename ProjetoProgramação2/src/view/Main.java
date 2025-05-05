@@ -84,7 +84,7 @@ public class Main {
             System.out.println("\n=== Menu Equipamento ===");
             System.out.println("1 - Cadastrar");
             System.out.println("2 - Listar");
-            System.out.println("3 - Listar");
+            System.out.println("3 - Remover");
             System.out.println("4 - Alterar");
             System.out.println("5 - Voltar");
             System.out.print("Sua escolha: ");
@@ -210,7 +210,7 @@ public class Main {
             System.out.println("\n=== Menu Cliente ===");
             System.out.println("1 - Cadastrar");
             System.out.println("2 - Listar");
-            System.out.println("3 - Listar");
+            System.out.println("3 - Remover");
             System.out.println("4 - Atualizar");
             System.out.println("5 - Voltar");
             System.out.print("Sua escolha: ");
@@ -380,8 +380,8 @@ public class Main {
             System.out.println("\n=== Menu Aluguel ===");
             System.out.println("1 - Cadastrar");
             System.out.println("2 - Listar");
-            System.out.println("3 - Listar");
-            System.out.println("4 - Listar");
+            System.out.println("3 - Remover");
+            System.out.println("4 - Altera");
             System.out.println("5 - Voltar");
             System.out.print("Sua escolha: ");
             opcao = teclado.nextInt();
