@@ -113,7 +113,7 @@ public class Main {
         }
     }
 
-    public static void CadastraEquipamento(){
+    private static void CadastraEquipamento(){
         System.out.println("Digite o id: ");
         int id = teclado.nextInt();
         teclado.nextLine();
@@ -128,7 +128,7 @@ public class Main {
         equipamentoServico.adicionar(equipamento);
     }
 
-    public static void listarEquipamento() {
+    private static void listarEquipamento() {
         List<Equipamento> equipamentos = equipamentoServico.listar();
         if (equipamentos.isEmpty()) {
             System.out.println("Nenhum equipamento encontrado.");
@@ -138,7 +138,7 @@ public class Main {
             }
         }
     }
-    public static void removerEquipamento(){
+    private static void removerEquipamento(){
         try {
             System.out.print("Digite o ID do jogo a ser removido: ");
             int id = teclado.nextInt();
@@ -167,7 +167,7 @@ public class Main {
         }
     }
 
-    public static void atualizarEquipamento() {
+    private static void atualizarEquipamento() {
         try {
             System.out.print("Digite o ID do equipamento a ser atualizado: ");
             int id = teclado.nextInt();
@@ -239,7 +239,7 @@ public class Main {
         }
     }
 
-    public static void CadastraCliente(){
+    private static void CadastraCliente(){
         System.out.print("Digite o ID do cliente: ");
         int id = teclado.nextInt();
         teclado.nextLine();
@@ -269,7 +269,7 @@ public class Main {
         clienteServico.cadastra(cliente);
     }
 
-    public static void listarCliente(){
+    private static void listarCliente(){
         List<Cliente> clientes = clienteServico.listar();
         if (clientes.isEmpty()) {
             System.out.println("Nenhum cliente encontrado.");
@@ -280,7 +280,7 @@ public class Main {
         } 
     }
 
-   public static void removerCliente(){
+    private static void removerCliente(){
         try {
             System.out.print("Digite o ID do jogo a ser removido: ");
             int id = teclado.nextInt();
@@ -309,7 +309,7 @@ public class Main {
         }
     }
 
-    public static void atualizarCliente(){
+    private static void atualizarCliente(){
         try {
             System.out.print("Digite o ID do cliente a ser atualizado: ");
             int id = teclado.nextInt();
@@ -409,7 +409,7 @@ public class Main {
         }
     }
 
-    public static void CadastraAluguel(){
+    private static void CadastraAluguel(){
         System.out.println("Digite o numero do aluguel: ");
         int numero = teclado.nextInt();
         teclado.nextLine();
@@ -425,7 +425,7 @@ public class Main {
         aluguelServico.salvar(aluguel);
     }
 
-    public static void listarAluguel(){
+    private static void listarAluguel(){
         List<Aluguel> alugueis = aluguelServico.listar();
         if (alugueis.isEmpty()) {
             System.out.println("Nenhum aluguel encontrado.");
@@ -436,7 +436,7 @@ public class Main {
         }
     }
 
-    public static void removerAluguel(){
+    private static void removerAluguel(){
         try {
             System.out.print("Digite o ID do jogo a ser removido: ");
             int id = teclado.nextInt();
@@ -465,7 +465,7 @@ public class Main {
         }
     }
 
-    public static void atualizarAluguel() {
+    private static void atualizarAluguel() {
         try {
             System.out.print("Digite o número do aluguel a ser atualizado: ");
             int numero = teclado.nextInt();
@@ -531,7 +531,7 @@ public class Main {
         }
     }
 
-    public static void CadastraFuncionario(){
+    private static void CadastraFuncionario(){
         System.out.print("ID: ");
         int id = teclado.nextInt();
         teclado.nextLine();
@@ -568,7 +568,7 @@ public class Main {
         funcServico.enqueue(funcionario);
     }
 
-    public static void listarFuncionario(){
+    private static void listarFuncionario(){
         List<Funcionario> funcionarios = funcServico.lista(); 
         if(funcionarios.isEmpty()){
             System.out.println("Nenhum funcionário encontrado.");
@@ -579,14 +579,14 @@ public class Main {
         }
     }
 
-    public static void removerFuncionario(){
+    private static void removerFuncionario(){
         System.out.print("Informe o ID do funcionário a ser removido: ");
         int id = teclado.nextInt();
         boolean sucesso = funcServico.buscarID(id);
         System.out.println(sucesso ? "Funcionário removido com sucesso!" : "Funcionário não encontrado.");
     }
     
-    public static void alterarFuncionario(){
+    private static void alterarFuncionario(){
         System.out.print("Informe o ID do funcionário a ser alterado: ");
         int id = teclado.nextInt();
         teclado.nextLine();
