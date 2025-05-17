@@ -1,5 +1,7 @@
 package Entidades;
+
 import java.util.Date;
+
 public abstract class Pessoa {
     private String nomeCompleto;
     private Date dataNascimento;
@@ -8,11 +10,11 @@ public abstract class Pessoa {
     private String email;
     private int id;
 
-    public Pessoa(int id, String nomeCompleto, Date dataNascimento, String cpf, String celular, String email){
+    public Pessoa(int id, String nomeCompleto, Date dataNascimento, String cpf, String celular, String email) {
         this.nomeCompleto = nomeCompleto;
         this.dataNascimento = dataNascimento;
         this.cpf = cpf;
-        this.celular = celular; 
+        this.celular = celular;
         this.email = email;
         this.id = id;
     }
@@ -43,7 +45,7 @@ public abstract class Pessoa {
 
     public void setCpf(String novocpf) {
         this.cpf = novocpf;
-    }  
+    }
 
     public String getCpf() {
         return this.cpf;

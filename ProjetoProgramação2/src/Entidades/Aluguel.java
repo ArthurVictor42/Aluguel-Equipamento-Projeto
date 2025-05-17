@@ -4,11 +4,11 @@ public class Aluguel {
     private double custoAluguel;
     private double custoManutencao;
     private int numeroAluguel;
-    
 
-    public Aluguel(int numeroAluguel, double custoAluguel, double custoManutencao){
+    public Aluguel(int numeroAluguel, double custoAluguel, double custoManutencao) {
         this.custoAluguel = custoAluguel;
         this.numeroAluguel = numeroAluguel;
+        this.custoManutencao = custoManutencao;
     }
 
     public void setCustoAluguel(double novocustoAluguel) {
@@ -37,6 +37,8 @@ public class Aluguel {
 
     @Override
     public String toString() {
-        return "Aluguel{Custo de aluguel= " + getCustoAluguel() + ", Custo de manutenção= " + getCustoManutencao() + ", Numero do aluguel= " + getNumeroAluguel() + "}";
+        return "Aluguel{Custo de aluguel= " + getCustoAluguel() + 
+        ", Custo de manutenção= " + getCustoManutencao() +
+        ", Numero do aluguel= " + getNumeroAluguel() + "}";
     }
 }

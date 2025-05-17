@@ -19,7 +19,7 @@ import Repositorio.EquipamentoRepositorioJDBC;
 import Servico.EquipamentoServico;
 
 import Entidades.Funcionario;
-import Repositorio.FuncionarioRepositorio;
+import Repositorio.FuncionarioRepositorioJDBC;
 import Servico.FuncionarioServico;
 
 public class Main {
@@ -36,13 +36,13 @@ public class Main {
     public static AluguelServico aluguelServico = new AluguelServico(aluguelRepositorio);
 
     // Funcionário sem o JDBC
-    public static FuncionarioRepositorio funcionarioRepositorio = new FuncionarioRepositorio();
+    public static FuncionarioRepositorioJDBC funcionarioRepositorio = new FuncionarioRepositorioJDBC();
     public static FuncionarioServico funcServico = new FuncionarioServico(funcionarioRepositorio);
 
     public static void main(String[] args) {
         int opcao = 0;
 
-        while(opcao != 5){
+        while (opcao != 5) {
             System.out.println("\n === Menu de escolha ===");
             System.out.println("1 - Gerenciar Equipamentos");
             System.out.println("2 - Gerenciar Clientes");
@@ -51,25 +51,25 @@ public class Main {
             System.out.println("5 - Encerrar");
             System.out.print("Sua escolha: ");
             opcao = teclado.nextInt();
-            
-            switch(opcao){
-                case 1: 
-                    menuEquipamento(); 
+
+            switch (opcao) {
+                case 1:
+                    menuEquipamento();
                     break;
-                case 2: 
-                    menuCliente(); 
+                case 2:
+                    menuCliente();
                     break;
-                case 3:     
-                    menuAluguel(); 
+                case 3:
+                    menuAluguel();
                     break;
-                case 4:  
-                    menuFuncionario(); 
+                case 4:
+                    menuFuncionario();
                     break;
-                case 5: 
-                    System.out.println("Sistema Encerrado com sucesso!"); 
+                case 5:
+                    System.out.println("Sistema Encerrado com sucesso!");
                     break;
-                default: 
-                    System.out.println("Opção Inválida."); 
+                default:
+                    System.out.println("Opção Inválida.");
                     break;
             }
         }
@@ -78,9 +78,9 @@ public class Main {
     }
 
     // Menu de equipamento
-    public static void menuEquipamento(){
+    public static void menuEquipamento() {
         int opcao = 0;
-        while(opcao != 3){
+        while (opcao != 5) {
             System.out.println("\n=== Menu Equipamento ===");
             System.out.println("1 - Cadastrar");
             System.out.println("2 - Listar");
@@ -91,11 +91,11 @@ public class Main {
             opcao = teclado.nextInt();
 
             switch (opcao) {
-                case 1: 
-                    CadastraEquipamento(); 
+                case 1:
+                    CadastraEquipamento();
                     break;
-                case 2: 
-                    listarEquipamento(); 
+                case 2:
+                    listarEquipamento();
                     break;
                 case 3:
                     removerEquipamento();
@@ -104,17 +104,17 @@ public class Main {
                     atualizarEquipamento();
                     break;
                 case 5:
-                    System.out.println("Voltando ao menu principal!"); 
+                    System.out.println("Voltando ao menu principal!");
                     break;
-                default: 
-                    System.out.println("Opção inválida."); 
-                    break;  
+                default:
+                    System.out.println("Opção inválida.");
+                    break;
             }
         }
     }
 
-    private static void CadastraEquipamento(){
-        System.out.println("Digite o id: ");
+    private static void CadastraEquipamento() {
+        System.out.print("Digite o id: ");
         int id = teclado.nextInt();
         teclado.nextLine();
 
@@ -125,7 +125,13 @@ public class Main {
         String tipo = teclado.next();
 
         Equipamento equipamento = new Equipamento(id, nome, tipo);
-        equipamentoServico.adicionar(equipamento);
+
+        try {
+            equipamentoServico.adicionar(equipamento); // adiciona no repositório
+            System.out.println("Equipamento cadastrado com sucesso!");
+        } catch (Exception e) {
+            System.out.println("Erro ao cadastrar Equipamento: " + e.getMessage());
+        }
     }
 
     private static void listarEquipamento() {
@@ -138,75 +144,41 @@ public class Main {
             }
         }
     }
-    private static void removerEquipamento(){
-        try {
-            System.out.print("Digite o ID do jogo a ser removido: ");
-            int id = teclado.nextInt();
-            
-            Equipamento equipamento = equipamentoServico.buscarID(id);
-            if (equipamento == null) {
-                System.out.println("Jogo nao encontrado!");
-                return;
-            }
-            
-            System.out.println("Jogo a ser removido:");
-            System.out.println(equipamento);
-            
-            System.out.print("Confirma a remocao? S/N: ");
-            String confirmacao = teclado.next();
-            
-            if (confirmacao.equalsIgnoreCase("S")) {
-                equipamentoServico.excluir(id);
-                System.out.println("Jogo removido com sucesso!");
-            } else {
-                System.out.println("Operacao cancelada.");
-            }
-            
-        } catch (Exception e) {
-            System.out.println("Erro ao remover o jogo: " + e.getMessage());
-        }
+
+    private static void removerEquipamento() {
+        System.out.print("Informe o ID do Equipamento a ser removido: ");
+        int id = teclado.nextInt();
+        boolean sucesso = equipamentoServico.buscarID(id); // remove da estrutura e banco
+        System.out.println(sucesso ? "Equipamento removido com sucesso!" : "Equipamento não encontrado.");
     }
 
     private static void atualizarEquipamento() {
-        try {
-            System.out.print("Digite o ID do equipamento a ser atualizado: ");
-            int id = teclado.nextInt();
-            teclado.nextLine();
-    
-            Equipamento eq = equipamentoServico.buscarID(id);
-            if (eq == null) {
-                System.out.println("Equipamento não encontrado!");
-                return;
-            }
-    
-            System.out.println("Dados atuais:");
-            System.out.println(eq);
-    
-            System.out.println("\nInsira os novos dados (ENTER para manter o valor atual):");
-    
-            System.out.print("Nome " + eq.getNomeEquipamento() + ": ");
-            String nome = teclado.nextLine();
-            if (!nome.isEmpty()){
-                eq.setNomeEquipamento(nome);
-            } 
+        System.out.print("Informe o ID do Cliente a ser alterado: ");
+        int id = teclado.nextInt();
+        teclado.nextLine();
 
-            System.out.print("Tipo " + eq.getTipoEquipamento() + ": ");
-            String tipo = teclado.nextLine();
-            if (!tipo.isEmpty()) {
-                eq.setTipoEquipamento(tipo);
-            }
-
-            equipamentoServico.alteraEquipamento(eq);
-            System.out.println("Equipamento atualizado com sucesso!");
-        } catch (Exception e) {
-            System.out.println("Erro ao atualizar equipamento: " + e.getMessage());
+        // Verifica se existe no banco
+        if (!equipamentoServico.buscarID(id)) {
+            System.out.println("Cliente com ID " + id + " não encontrado.");
+            return;
         }
+
+        // Coletar os novos dados
+        System.out.print("Novo nome: ");
+        String nome = teclado.nextLine();
+
+        System.out.print("Novo tipo: ");
+        String tipo = teclado.nextLine();
+
+        Equipamento atualizado = new Equipamento(id, nome, tipo);
+        boolean sucesso = equipamentoServico.alteraEquipamento(atualizado);
+        System.out.println(sucesso ? "Equipamento alterado com sucesso!" : "Erro ao alterar Equipamento.");
     }
 
     // Menu de cliente
-    public static void menuCliente(){
+    public static void menuCliente() {
         int opcao = 0;
-        while(opcao != 3){
+        while (opcao != 5) {
             System.out.println("\n=== Menu Cliente ===");
             System.out.println("1 - Cadastrar");
             System.out.println("2 - Listar");
@@ -217,29 +189,29 @@ public class Main {
             opcao = teclado.nextInt();
 
             switch (opcao) {
-                case 1: 
-                    CadastraCliente(); 
+                case 1:
+                    CadastraCliente();
                     break;
-                case 2: 
-                    listarCliente(); 
+                case 2:
+                    listarCliente();
                     break;
                 case 3:
                     removerCliente();
                     break;
                 case 4:
                     atualizarCliente();
-                    break;    
-                case 5:
-                    System.out.println("Voltando ao menu principal!"); 
                     break;
-                default: 
-                    System.out.println("Opção inválida."); 
+                case 5:
+                    System.out.println("Voltando ao menu principal!");
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
                     break;
             }
         }
     }
 
-    private static void CadastraCliente(){
+    private static void CadastraCliente() {
         System.out.print("Digite o ID do cliente: ");
         int id = teclado.nextInt();
         teclado.nextLine();
@@ -266,10 +238,16 @@ public class Main {
         String endereco = teclado.nextLine();
 
         Cliente cliente = new Cliente(id, nome, dataNascimento, cpf, telefone, email, endereco);
-        clienteServico.cadastra(cliente);
+        
+        try {
+            clienteServico.cadastra(cliente); // adiciona no repositório
+            System.out.println("cliente cadastrado com sucesso!");
+        } catch (Exception e) {
+            System.out.println("Erro ao cadastrar cliente: " + e.getMessage());
+        }
     }
 
-    private static void listarCliente(){
+    private static void listarCliente() {
         List<Cliente> clientes = clienteServico.listar();
         if (clientes.isEmpty()) {
             System.out.println("Nenhum cliente encontrado.");
@@ -277,106 +255,62 @@ public class Main {
             for (Cliente cli : clientes) {
                 System.out.println(cli);
             }
-        } 
-    }
-
-    private static void removerCliente(){
-        try {
-            System.out.print("Digite o ID do jogo a ser removido: ");
-            int id = teclado.nextInt();
-            
-            Cliente cliente = clienteServico.buscarID(id);
-            if (cliente == null) {
-                System.out.println("Jogo nao encontrado!");
-                return;
-            }
-            
-            System.out.println("Jogo a ser removido:");
-            System.out.println(cliente);
-            
-            System.out.print("Confirma a remocao? S/N: ");
-            String confirmacao = teclado.next();
-            
-            if (confirmacao.equalsIgnoreCase("S")) {
-                clienteServico.excluir(id);
-                System.out.println("Jogo removido com sucesso!");
-            } else {
-                System.out.println("Operacao cancelada.");
-            }
-            
-        } catch (Exception e) {
-            System.out.println("Erro ao remover o jogo: " + e.getMessage());
         }
     }
 
-    private static void atualizarCliente(){
-        try {
-            System.out.print("Digite o ID do cliente a ser atualizado: ");
-            int id = teclado.nextInt();
-            teclado.nextLine();
-    
-            Cliente clienteExistente = clienteServico.buscarID(id);
-            if (clienteExistente == null) {
-                System.out.println("Cliente não encontrado!");
-                return;
-            }
-    
-            System.out.println("Dados atuais do cliente:");
-            System.out.println(clienteExistente);
-    
-            System.out.println("\nInsira os novos dados:");
-    
-            System.out.print("Nome [" + clienteExistente.getNomeCompleto() + "]: ");
-            String nome = teclado.nextLine();
-            if (!nome.isEmpty()) {
-                clienteExistente.setNomeCompleto(nome);
-            }
-    
-            System.out.print("CPF [" + clienteExistente.getCpf() + "]: ");
-            String cpf = teclado.nextLine();
-            if (!cpf.isEmpty()) {
-                clienteExistente.setCpf(cpf);
-            }
-    
-            System.out.print("Telefone [" + clienteExistente.getCelular() + "]: ");
-            String telefone = teclado.nextLine();
-            if (!telefone.isEmpty()) {
-                clienteExistente.setCelular(telefone);
-            }
-
-            System.out.print("Email [" + clienteExistente.getEmail() + "]: ");
-            String email = teclado.nextLine();
-            if (!email.isEmpty()) {
-                clienteExistente.setEmail(email);
-            }
-    
-            System.out.print("Endereço [" + clienteExistente.getEndereco() + "]: ");
-            String endereco = teclado.nextLine();
-            if (!endereco.isEmpty()) {
-                clienteExistente.setEndereco(endereco);
-            }
-    
-            System.out.print("Data de nascimento (dd/MM/yyyy) [" + clienteExistente.getDatanascimento() + "]: ");
-            String data = teclado.nextLine();
-            if (!data.isEmpty()) {
-                try {
-                    clienteExistente.setDataNascimento(new SimpleDateFormat("dd/MM/yyyy").parse(data));
-                } catch (ParseException e) {
-                    System.out.println("Data inválida! Mantendo a data anterior.");
-                }
-            }
-    
-            clienteServico.alteraCliente(clienteExistente);
-            System.out.println("Cliente atualizado com sucesso!");
-        } catch (Exception e) {
-            System.out.println("Erro ao atualizar cliente: " + e.getMessage());
-        }
+    private static void removerCliente() {
+        System.out.print("Informe o ID do Cliente a ser removido: ");
+        int id = teclado.nextInt();
+        boolean sucesso = clienteServico.excluir(id); // remove da estrutura e banco
+        System.out.println(sucesso ? "Cliente removido com sucesso!" : "Cliente não encontrado.");
     }
-    
+
+    private static void atualizarCliente() {
+        System.out.print("Informe o ID do Cliente a ser alterado: ");
+        int id = teclado.nextInt();
+        teclado.nextLine();
+
+        // Verifica se existe no banco
+        if (!clienteServico.buscarID(id)) {
+            System.out.println("Cliente com ID " + id + " não encontrado.");
+            return;
+        }
+
+        // Coletar os novos dados
+        System.out.print("Novo nome: ");
+        String nome = teclado.nextLine();
+
+        System.out.print("Nova data de nascimento (dd/MM/yyyy): ");
+        String data = teclado.nextLine();
+        Date dataNascimento = null;
+        try {
+            dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(data);
+        } catch (ParseException e) {
+            System.out.println("Data inválida!");
+            return;
+        }
+
+        System.out.print("Novo CPF: ");
+        String cpf = teclado.nextLine();
+
+        System.out.print("Novo telefone: ");
+        String telefone = teclado.nextLine();
+
+        System.out.print("Novo email: ");
+        String email = teclado.nextLine();
+
+        System.out.print("Novo endereco: ");
+        String endereco = teclado.nextLine();
+
+        Cliente atualizado = new Cliente(id, nome, dataNascimento, cpf, telefone, email, endereco);
+        boolean sucesso = clienteServico.alteraCliente(atualizado);
+        System.out.println(sucesso ? "Cliente alterado com sucesso!" : "Erro ao alterar Cliente.");
+    }
+
     // Menu de Aluguel
-    public static void menuAluguel(){
+    public static void menuAluguel() {
         int opcao = 0;
-        while(opcao != 3){
+        while (opcao != 5) {
             System.out.println("\n=== Menu Aluguel ===");
             System.out.println("1 - Cadastrar");
             System.out.println("2 - Listar");
@@ -387,11 +321,11 @@ public class Main {
             opcao = teclado.nextInt();
 
             switch (opcao) {
-                case 1: 
-                    CadastraAluguel(); 
+                case 1:
+                    CadastraAluguel();
                     break;
-                case 2: 
-                    listarAluguel(); 
+                case 2:
+                    listarAluguel();
                     break;
                 case 3:
                     removerAluguel();
@@ -400,17 +334,17 @@ public class Main {
                     atualizarAluguel();
                     break;
                 case 5:
-                    System.out.println("Voltando ao menu principal!"); 
+                    System.out.println("Voltando ao menu principal!");
                     break;
-                default: 
-                    System.out.println("Opção inválida."); 
-                    break; 
+                default:
+                    System.out.println("Opção inválida.");
+                    break;
             }
         }
     }
 
-    private static void CadastraAluguel(){
-        System.out.println("Digite o numero do aluguel: ");
+    private static void CadastraAluguel() {
+        System.out.print("Digite o numero do aluguel: ");
         int numero = teclado.nextInt();
         teclado.nextLine();
 
@@ -418,14 +352,19 @@ public class Main {
         double valor = teclado.nextDouble();
         teclado.nextLine();
 
-        System.out.println("Digite o valor de manutenção: ");
+        System.out.print("Digite o valor de manutenção: ");
         double manutencao = teclado.nextDouble();
 
-        Aluguel aluguel = new Aluguel(numero, valor, manutencao); 
-        aluguelServico.salvar(aluguel);
+        Aluguel aluguel = new Aluguel(numero, valor, manutencao);
+        try {
+            aluguelServico.salvar(aluguel); // adiciona no repositório
+            System.out.println("aluguel cadastrado com sucesso!");
+        } catch (Exception e) {
+            System.out.println("Erro ao cadastrar aluguel: " + e.getMessage());
+        }
     }
 
-    private static void listarAluguel(){
+    private static void listarAluguel() {
         List<Aluguel> alugueis = aluguelServico.listar();
         if (alugueis.isEmpty()) {
             System.out.println("Nenhum aluguel encontrado.");
@@ -436,102 +375,79 @@ public class Main {
         }
     }
 
-    private static void removerAluguel(){
-        try {
-            System.out.print("Digite o ID do jogo a ser removido: ");
-            int id = teclado.nextInt();
-            
-            Aluguel aluguel = aluguelServico.buscarNumero(id);
-            if (aluguel == null) {
-                System.out.println("Jogo nao encontrado!");
-                return;
-            }
-            
-            System.out.println("Jogo a ser removido:");
-            System.out.println(aluguel);
-            
-            System.out.print("Confirma a remocao? S/N: ");
-            String confirmacao = teclado.next();
-            
-            if (confirmacao.equalsIgnoreCase("S")) {
-                aluguelServico.excluir(id);
-                System.out.println("Jogo removido com sucesso!");
-            } else {
-                System.out.println("Operacao cancelada.");
-            }
-            
-        } catch (Exception e) {
-            System.out.println("Erro ao remover o jogo: " + e.getMessage());
-        }
+    private static void removerAluguel() {
+        System.out.print("Informe o ID do aluguel a ser removido: ");
+        int id = teclado.nextInt();
+        boolean sucesso = aluguelServico.buscarNumero(id); // remove da estrutura e banco
+        System.out.println(sucesso ? "aluguel removido com sucesso!" : "aluguel não encontrado.");
     }
 
     private static void atualizarAluguel() {
-        try {
-            System.out.print("Digite o número do aluguel a ser atualizado: ");
-            int numero = teclado.nextInt();
-            teclado.nextLine();
-    
-            Aluguel aluguel = aluguelServico.buscarNumero(numero);
-            if (aluguel == null) {
-                System.out.println("Aluguel não encontrado!");
-                return;
-            }
-    
-            System.out.println("Dados atuais:");
-            System.out.println(aluguel);
-    
-            System.out.println("\nInsira os novos dados ( ENTER para manter o valor atual):");
-    
-            System.out.print("Valor [" + aluguel.getCustoAluguel() + "]: ");
-            String valorStr = teclado.nextLine();
-            if (!valorStr.isEmpty()){ 
-                aluguel.setCustoAluguel(Double.parseDouble(valorStr));
-            }
-            
-            aluguelServico.alteraAluguel(aluguel);
-            System.out.println("Aluguel atualizado com sucesso!");
-        } catch (Exception e) {
-            System.out.println("Erro ao atualizar aluguel: " + e.getMessage());
+        System.out.print("Informe o ID do aluguel a ser alterado: ");
+        int id = teclado.nextInt();
+        teclado.nextLine();
+
+        // Verifica se existe no banco
+        if (!aluguelServico.buscarNumero(id)) {
+            System.out.println("Aluguel com ID " + id + " não encontrado.");
+            return;
         }
+
+        // Coletar os novos dados
+        System.out.print("Novo numero de aluguel: ");
+        int numero = teclado.nextInt();
+        teclado.nextLine();
+
+        System.out.print("Novo custo de aluguel: ");
+        Double custo  = teclado.nextDouble();
+        teclado.nextLine();
+
+        System.out.print("Novo custo manutenção: ");
+        Double manutencao = teclado.nextDouble();
+        teclado.nextLine();
+
+        Aluguel atualizado = new Aluguel(numero, custo, manutencao);
+        boolean sucesso = aluguelServico.alteraAluguel(atualizado);
+        System.out.println(sucesso ? "Aluguel alterado com sucesso!" : "Erro ao alterar Aluguel.");
     }
 
     // Menu de funcionario
-    public static void menuFuncionario(){
+    public static void menuFuncionario() {
         int opcao = 0;
-        while(opcao != 3){
+        while (opcao != 5) {
             System.out.println("\n=== Menu Funcionário ===");
             System.out.println("1 - Cadastrar");
             System.out.println("2 - Listar");
-            System.out.println("3 - remover");
-            System.out.println("4 - alterar");
+            System.out.println("3 - Remover");
+            System.out.println("4 - Alterar");
             System.out.println("5 - Voltar");
             System.out.print("Sua escolha: ");
             opcao = teclado.nextInt();
 
             switch (opcao) {
-                case 1: 
-                    CadastraFuncionario(); 
+                case 1:
+                    cadastrarFuncionario();
                     break;
-                case 2: 
-                    listarFuncionario(); 
+                case 2:
+                    listarFuncionario();
                     break;
                 case 3:
                     removerFuncionario();
                     break;
                 case 4:
                     alterarFuncionario();
-                    break;    
-                case 5:
-                    System.out.println("Voltando ao menu principal!"); 
                     break;
-                default: 
-                    System.out.println("Opção inválida."); 
-                    break; 
+                case 5:
+                    System.out.println("Voltando ao menu principal!");
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+                    break;
             }
         }
     }
 
-    private static void CadastraFuncionario(){
+    private static void cadastrarFuncionario() {
         System.out.print("ID: ");
         int id = teclado.nextInt();
         teclado.nextLine();
@@ -565,36 +481,48 @@ public class Main {
         double salario = teclado.nextDouble();
 
         Funcionario funcionario = new Funcionario(id, nome, dataNascimento, cpf, telefone, email, cargo, salario);
-        funcServico.enqueue(funcionario);
+
+        try {
+            funcServico.adicionarFuncionario(funcionario); // adiciona no repositório (fila + banco)
+            System.out.println("Funcionário cadastrado com sucesso!");
+        } catch (Exception e) {
+            System.out.println("Erro ao cadastrar funcionário: " + e.getMessage());
+        }
     }
 
-    private static void listarFuncionario(){
-        List<Funcionario> funcionarios = funcServico.lista(); 
-        if(funcionarios.isEmpty()){
+    private static void listarFuncionario() {
+        List<Funcionario> funcionarios = funcServico.exibirFuncionarios();
+        if (funcionarios.isEmpty()) {
             System.out.println("Nenhum funcionário encontrado.");
         } else {
-            for(Funcionario fun : funcionarios){
+            for (Funcionario fun : funcionarios) {
                 System.out.println(fun);
             }
         }
     }
 
-    private static void removerFuncionario(){
+    private static void removerFuncionario() {
         System.out.print("Informe o ID do funcionário a ser removido: ");
         int id = teclado.nextInt();
-        boolean sucesso = funcServico.buscarID(id);
+        boolean sucesso = funcServico.BuscarPorId(id); // remove da estrutura e banco
         System.out.println(sucesso ? "Funcionário removido com sucesso!" : "Funcionário não encontrado.");
     }
-    
-    private static void alterarFuncionario(){
+
+    private static void alterarFuncionario() {
         System.out.print("Informe o ID do funcionário a ser alterado: ");
         int id = teclado.nextInt();
         teclado.nextLine();
-    
+
+        // Verifica se existe no banco
+        if (!funcServico.BuscarPorId(id)) {
+            System.out.println("Funcionário com ID " + id + " não encontrado.");
+            return;
+        }
+
         // Coletar os novos dados
         System.out.print("Novo nome: ");
         String nome = teclado.nextLine();
-    
+
         System.out.print("Nova data de nascimento (dd/MM/yyyy): ");
         String data = teclado.nextLine();
         Date dataNascimento = null;
@@ -604,25 +532,24 @@ public class Main {
             System.out.println("Data inválida!");
             return;
         }
-    
+
         System.out.print("Novo CPF: ");
         String cpf = teclado.nextLine();
-    
+
         System.out.print("Novo telefone: ");
         String telefone = teclado.nextLine();
-    
+
         System.out.print("Novo email: ");
         String email = teclado.nextLine();
-    
+
         System.out.print("Novo cargo: ");
         String cargo = teclado.nextLine();
-    
+
         System.out.print("Novo salário: ");
         double salario = teclado.nextDouble();
-    
+
         Funcionario atualizado = new Funcionario(id, nome, dataNascimento, cpf, telefone, email, cargo, salario);
         boolean sucesso = funcServico.alterarFuncionario(atualizado);
-        System.out.println(sucesso ? "Funcionário alterado com sucesso!" : "Funcionário não encontrado.");
+        System.out.println(sucesso ? "Funcionário alterado com sucesso!" : "Erro ao alterar funcionário.");
     }
-    
 }

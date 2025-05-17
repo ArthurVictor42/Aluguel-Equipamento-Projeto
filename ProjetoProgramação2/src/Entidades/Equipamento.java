@@ -5,11 +5,12 @@ public class Equipamento {
     private String tipoEquipamento;
     private int id;
 
-    public Equipamento(int id, String nomeEquipamento, String tipoEquipamento){
+    public Equipamento(int id, String nomeEquipamento, String tipoEquipamento) {
         this.nomeEquipamento = nomeEquipamento;
         this.tipoEquipamento = tipoEquipamento;
         this.id = id;
     }
+
     public void setNomeEquipamento(String nomeEquipamento) {
         this.nomeEquipamento = nomeEquipamento;
     }
@@ -36,7 +37,8 @@ public class Equipamento {
 
     @Override
     public String toString() {
-        return "Equipamento{id= " + getId() + ", nome= " + getNomeEquipamento() + ", Tipo= " + getTipoEquipamento() +"}";
-    }           
+        return "Equipamento{id= " + getId() + ", nome= " + getNomeEquipamento() + ", Tipo= " + getTipoEquipamento()
+                + "}";
+    }
 
 }

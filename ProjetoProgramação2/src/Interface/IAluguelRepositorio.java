@@ -8,11 +8,11 @@ public interface IAluguelRepositorio {
     // Interface do repositorio do Aluguel
     void salvar(Aluguel aluguel);
 
-    void remover(int id);
+    boolean remover(int id);
 
     List<Aluguel> listar();
 
-    void alterar(Aluguel aluguel);
+    boolean alterar(Aluguel aluguel);
 
-    Aluguel buscarNumero(int id);
+    boolean buscarNumero(int id);
 }

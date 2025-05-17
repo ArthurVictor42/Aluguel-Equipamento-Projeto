@@ -6,7 +6,8 @@ public class Funcionario extends Pessoa {
     private String cargo;
     private double salario;
 
-    public Funcionario(int id, String nome, Date dataNascimento, String cpf, String celular, String email, String cargo, double salario){
+    public Funcionario(int id, String nome, Date dataNascimento, String cpf, String celular, String email, String cargo,
+            double salario) {
         super(id, nome, dataNascimento, cpf, celular, email);
         this.cargo = cargo;
         this.salario = salario;
@@ -31,7 +32,9 @@ public class Funcionario extends Pessoa {
 
     @Override
     public String toString() {
-        return "Funcionario [ID=" + getId() + ", Nome=" + getNomeCompleto() + ", Data de Nascimento=" + getDatanascimento() + ", CPF=" + getCpf() + ", Celular=" + getCelular() + ", Email=" + getEmail() + ", Cargo=" + getCargo() + ", Salario=" + getSalario() + "]";
+        return "Funcionario [ID=" + getId() + ", Nome=" + getNomeCompleto() + ", Data de Nascimento="
+                + getDatanascimento() + ", CPF=" + getCpf() + ", Celular=" + getCelular() + ", Email=" + getEmail()
+                + ", Cargo=" + getCargo() + ", Salario=" + getSalario() + "]";
     }
 
 }

@@ -1,53 +1,40 @@
 package Servico;
 
 import Entidades.Funcionario;
-import Interface.IFuncionarioFilaRepositorio;
-import Repositorio.FuncionarioRepositorio;
-import java.util.ArrayList;
+import Interface.IFuncionarioRepositorio;
+import Repositorio.FuncionarioRepositorioJDBC;
+
+import java.util.List;
 
 public class FuncionarioServico {
-    private IFuncionarioFilaRepositorio filaRepositorio;
+    private IFuncionarioRepositorio repositorio;
 
-    public FuncionarioServico(FuncionarioRepositorio funcionarioRepositorio){
-        this.filaRepositorio = funcionarioRepositorio;
+    public FuncionarioServico(FuncionarioRepositorioJDBC funcionarioRepositorio) {
+        this.repositorio = funcionarioRepositorio;
     }
 
-    // Chama o metodo de adicionar o elemento da fila
-    public void enqueue(Funcionario funcionario){
-        filaRepositorio.enqueue(funcionario);
+    // Inserir no fim da lista
+    public void adicionarFuncionario(Funcionario funcionario) {
+        repositorio.inserirNoFim(funcionario);
     }
 
-    // Chama o metodo de remove o elemento da fila
-    public Funcionario dequeue(){
-        return filaRepositorio.dequeue();
+    // Remover funcionário por ID
+    public boolean removerFuncionario(int id) {
+       return repositorio.remover(id);
     }
 
-    // Chama o metodo pra verifica se a fila está vazia
-    public boolean empty(){
-        return filaRepositorio.empty();
+    // Exibir todos os funcionários
+    public List<Funcionario> exibirFuncionarios() {
+        return repositorio.exibir();
     }
 
-    // Chama o metodo de verifica o tamanho da fila
-    public int size(){
-        return filaRepositorio.size();
+    // Alterar dados de um funcionário
+    public boolean alterarFuncionario(Funcionario funcionario) {
+        return repositorio.alterarFuncionario(funcionario);
     }
 
-    // Chama o metodo de ver o primeiro elemento da fila
-    public Funcionario front(){
-        return filaRepositorio.front();
-    }
-
-    // Chama o metodo de listar os elementos da fila
-    public ArrayList<Funcionario> lista(){
-        return filaRepositorio.lista();
-    }
-
-    // Metodo pra altera a informação do objeto salvo na fila
-    public boolean alterarFuncionario(Funcionario funcionario){
-        return filaRepositorio.alterarFuncionario(funcionario);
-    }
-
-    public boolean buscarID(int id){
-        return filaRepositorio.removePorId(id);
+    // Remover por ID com retorno booleano
+    public boolean BuscarPorId(int id) {
+        return repositorio.buscarPorId(id);
     }
 }

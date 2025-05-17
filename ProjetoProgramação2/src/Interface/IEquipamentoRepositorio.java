@@ -8,12 +8,12 @@ public interface IEquipamentoRepositorio {
     // Interface do repositorio do Equipamento
     void salvar(Equipamento equipamento);
 
-    void remover(int id);
+    boolean remover(int id);
 
     List<Equipamento> listar();
 
-    void alterar(Equipamento equipamento);
+    boolean alterar(Equipamento equipamento);
 
-    Equipamento buscarID(int id);
-    
+    boolean buscarID(int id);
+
 }
