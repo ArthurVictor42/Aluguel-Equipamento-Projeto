@@ -54,7 +54,7 @@ public class ClienteRepositorioJDBC implements IClienteRepositorio {
 
         try (Connection conn = ConexaoBanco.conexao();
                 PreparedStatement stmt = conn.prepareStatement(sql);
-                ResultSet rs = stmt.executeQuery(sql)) {
+                ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 Cliente cliente = new Cliente(
@@ -77,7 +77,7 @@ public class ClienteRepositorioJDBC implements IClienteRepositorio {
 
     // Metodo pra Altera a informação do cliente no Banco de dados
     public boolean altera(Cliente cliente) {
-        String sql = "UPDATE cliente SET nome_completo = ?, dt_nascimento = ?, cpf = ?, telefone = ?, email = ?, endereco = ? WHERE id = ?";
+        String sql = "UPDATE cliente SET nome_completo = ?, dt_nascimento = ?, cpf = ?, telefone = ?, email = ?, endereco = ? WHERE id_cliente = ?";
         try (Connection conn = ConexaoBanco.conexao(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, cliente.getNomeCompleto());
             java.sql.Date sqlDate = new java.sql.Date(cliente.getDatanascimento().getTime());
@@ -86,6 +86,7 @@ public class ClienteRepositorioJDBC implements IClienteRepositorio {
             stmt.setString(4, cliente.getCelular());
             stmt.setString(5, cliente.getEmail());
             stmt.setString(6, cliente.getEndereco());
+            stmt.setInt(7, cliente.getId());
 
             stmt.executeUpdate();
             return true;
@@ -98,7 +99,7 @@ public class ClienteRepositorioJDBC implements IClienteRepositorio {
     }
 
     public boolean buscarID(int numero) {
-        String sql = "SELECT * FROM aluguel WHERE id_cliente = ?";
+        String sql = "SELECT * FROM cliente WHERE id_cliente = ?";
         try (Connection conn = ConexaoBanco.conexao();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
 

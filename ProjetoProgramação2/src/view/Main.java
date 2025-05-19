@@ -148,7 +148,7 @@ public class Main {
     private static void removerEquipamento() {
         System.out.print("Informe o ID do Equipamento a ser removido: ");
         int id = teclado.nextInt();
-        boolean sucesso = equipamentoServico.buscarID(id); // remove da estrutura e banco
+        boolean sucesso = equipamentoServico.excluir(id); // remove da estrutura e banco
         System.out.println(sucesso ? "Equipamento removido com sucesso!" : "Equipamento não encontrado.");
     }
 
@@ -378,7 +378,7 @@ public class Main {
     private static void removerAluguel() {
         System.out.print("Informe o ID do aluguel a ser removido: ");
         int id = teclado.nextInt();
-        boolean sucesso = aluguelServico.buscarNumero(id); // remove da estrutura e banco
+        boolean sucesso = aluguelServico.excluir(id); // remove da estrutura e banco
         System.out.println(sucesso ? "aluguel removido com sucesso!" : "aluguel não encontrado.");
     }
 
@@ -394,9 +394,6 @@ public class Main {
         }
 
         // Coletar os novos dados
-        System.out.print("Novo numero de aluguel: ");
-        int numero = teclado.nextInt();
-        teclado.nextLine();
 
         System.out.print("Novo custo de aluguel: ");
         Double custo  = teclado.nextDouble();
@@ -406,7 +403,7 @@ public class Main {
         Double manutencao = teclado.nextDouble();
         teclado.nextLine();
 
-        Aluguel atualizado = new Aluguel(numero, custo, manutencao);
+        Aluguel atualizado = new Aluguel(id, custo, manutencao);
         boolean sucesso = aluguelServico.alteraAluguel(atualizado);
         System.out.println(sucesso ? "Aluguel alterado com sucesso!" : "Erro ao alterar Aluguel.");
     }
@@ -504,7 +501,7 @@ public class Main {
     private static void removerFuncionario() {
         System.out.print("Informe o ID do funcionário a ser removido: ");
         int id = teclado.nextInt();
-        boolean sucesso = funcServico.BuscarPorId(id); // remove da estrutura e banco
+        boolean sucesso = funcServico.removerFuncionario(id); // remove da estrutura e banco
         System.out.println(sucesso ? "Funcionário removido com sucesso!" : "Funcionário não encontrado.");
     }
 

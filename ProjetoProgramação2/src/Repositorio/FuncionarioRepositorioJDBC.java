@@ -55,7 +55,6 @@ public class FuncionarioRepositorioJDBC implements IFuncionarioRepositorio {
         try (Connection conn = ConexaoBanco.conexao(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
-            System.out.println("Funcionario removido com sucesso!");
             return true;
         } catch (SQLException e) {
             System.out.println("Erro ao deletar: " + e.getMessage());
