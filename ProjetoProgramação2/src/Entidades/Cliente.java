@@ -22,6 +22,6 @@ public class Cliente extends Pessoa {
     @Override
     public String toString() {
         return "Cliente{ ID= " + getId() + ", nome=" + getNomeCompleto() + ", idade=" + getDatanascimento() + ", cpf="
-                + getCpf() + ", telefone=" + getCelular() + ", email=" + getEmail() + "}";
+                + getCpf() + ", telefone=" + getCelular() + ", email=" + getEmail() + ", Endereço=" + getEndereco() + "}";
     }
 }
