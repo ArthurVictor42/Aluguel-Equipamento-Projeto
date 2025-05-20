@@ -128,7 +128,6 @@ public class Main {
 
         try {
             equipamentoServico.adicionar(equipamento); // adiciona no repositório
-            System.out.println("Equipamento cadastrado com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro ao cadastrar Equipamento: " + e.getMessage());
         }
@@ -241,7 +240,6 @@ public class Main {
         
         try {
             clienteServico.cadastra(cliente); // adiciona no repositório
-            System.out.println("cliente cadastrado com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro ao cadastrar cliente: " + e.getMessage());
         }
@@ -358,7 +356,6 @@ public class Main {
         Aluguel aluguel = new Aluguel(numero, valor, manutencao);
         try {
             aluguelServico.salvar(aluguel); // adiciona no repositório
-            System.out.println("aluguel cadastrado com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro ao cadastrar aluguel: " + e.getMessage());
         }
@@ -481,7 +478,6 @@ public class Main {
 
         try {
             funcServico.adicionarFuncionario(funcionario); // adiciona no repositório (fila + banco)
-            System.out.println("Funcionário cadastrado com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro ao cadastrar funcionário: " + e.getMessage());
         }

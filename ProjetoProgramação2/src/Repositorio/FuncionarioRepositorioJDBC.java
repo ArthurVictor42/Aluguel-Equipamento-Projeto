@@ -34,6 +34,8 @@ public class FuncionarioRepositorioJDBC implements IFuncionarioRepositorio {
             stmt.setString(7, funcionario.getCargo());
             stmt.setDouble(8, funcionario.getSalario());
             stmt.executeUpdate();
+
+            System.out.println("Funcionario cadastrado com sucesso!");
         } catch (SQLException e) {
             e.printStackTrace();
         }

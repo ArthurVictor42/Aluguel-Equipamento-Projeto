@@ -19,7 +19,7 @@
 -- Table structure for table `equipamento`
 --
 
--- DROP TABLE IF EXISTS `equipamento`;
+DROP TABLE IF EXISTS `equipamento`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `equipamento` (
@@ -27,7 +27,7 @@ CREATE TABLE `equipamento` (
   `nome_equipamento` varchar(30) NOT NULL,
   `tipo_equipamento` varchar(25) NOT NULL,
   PRIMARY KEY (`id_equipamento`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `equipamento` (
 
 LOCK TABLES `equipamento` WRITE;
 /*!40000 ALTER TABLE `equipamento` DISABLE KEYS */;
-INSERT INTO `equipamento` VALUES (1,'Machado','Manual'),(2,'Serra','Eletrica'),(3,'Picarreta','Manual'),(4,'Enxada','Manual');
+INSERT INTO `equipamento` VALUES (1,'Machado','Manual'),(2,'Serra','Eletrica'),(3,'Picareta','Manual'),(4,'Enxada','Manual');
 /*!40000 ALTER TABLE `equipamento` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-19 23:10:15
+-- Dump completed on 2025-05-20 10:48:30

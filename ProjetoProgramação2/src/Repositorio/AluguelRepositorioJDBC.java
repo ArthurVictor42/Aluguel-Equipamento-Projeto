@@ -20,6 +20,7 @@ public class AluguelRepositorioJDBC implements IAluguelRepositorio {
             stmt.setDouble(3, aluguel.getCustoManutencao());
 
             stmt.executeUpdate();
+            System.out.println("Aluguel cadastrado com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro ao inserir aluguel: " + e.getMessage());
         }

@@ -25,7 +25,7 @@ public class ClienteRepositorioJDBC implements IClienteRepositorio {
             stmt.setString(7, cliente.getEndereco());
 
             stmt.executeUpdate();
-
+             System.out.println("cliente cadastrado com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro ao inserir: " + e.getMessage());
         }
@@ -40,7 +40,6 @@ public class ClienteRepositorioJDBC implements IClienteRepositorio {
             stmt.executeUpdate();
 
             return true;
-
         } catch (Exception e) {
             System.out.println("Erro ao deleta: " + e.getMessage());
             return false;

@@ -19,6 +19,7 @@ public class EquipamentoRepositorioJDBC implements IEquipamentoRepositorio {
             stmt.setString(3, equipamento.getTipoEquipamento());
 
             stmt.executeUpdate();
+            System.out.println("Equipamento cadastrado com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro ao inserir equipamento: " + e.getMessage());
         }

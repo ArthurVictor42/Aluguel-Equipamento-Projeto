@@ -2,7 +2,6 @@ package Interface;
 
 import Entidades.Equipamento;
 import java.util.List;
-import java.util.ArrayList;
 
 public interface IEquipamentoRepositorio {
     // Interface do repositorio do Equipamento
